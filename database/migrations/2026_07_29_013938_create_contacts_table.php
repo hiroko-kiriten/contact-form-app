@@ -15,18 +15,18 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('category_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
+                ->constrained()
+                ->cascadeOnDelete();
 
             $table->string('first_name');
             $table->string('last_name');
             $table->tinyInteger('gender');
             $table->string('email');
-            $table->string('tel',11);
+            $table->string('tel', 11);
             $table->string('address');
             $table->string('building')->nullable();
             $table->text('detail');
-            
+
             $table->timestamps();
         });
     }
