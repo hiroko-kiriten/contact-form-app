@@ -20,16 +20,14 @@ Laravel Fortify
 Laravel Sanctum
 
 ## ER図
-
-
-
+```mermaid
 erDiagram
 
-    users {
+    categories {
         bigint id PK
-        string name
-        string email
-        string password
+        string content
+        timestamp created_at
+        timestamp updated_at
     }
 
     contacts {
@@ -37,22 +35,21 @@ erDiagram
         bigint category_id FK
         string first_name
         string last_name
-        int gender
+        integer gender
         string email
         string tel
         string address
         string building
         text detail
-    }
-
-    categories {
-        bigint id PK
-        string content
+        timestamp created_at
+        timestamp updated_at
     }
 
     tags {
         bigint id PK
         string name
+        timestamp created_at
+        timestamp updated_at
     }
 
     contact_tag {
@@ -63,13 +60,10 @@ erDiagram
 
     categories ||--o{ contacts : "has many"
 
-    contacts }o--|| categories : "belongs to"
-
     contacts ||--o{ contact_tag : "has many"
 
     tags ||--o{ contact_tag : "has many"
-
-    users ||--o{ contacts : "has many"
+```  
     
 ## 開発環境URL
 
