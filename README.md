@@ -21,6 +21,8 @@ Laravel Sanctum
 
 ## ER図
 
+
+
 erDiagram
 
     users {
