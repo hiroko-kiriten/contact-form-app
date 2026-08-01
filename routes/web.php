@@ -17,6 +17,8 @@ Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('auth');
 Route::get('/admin/contacts/{id}', [AdminController::class, 'show'])
     ->middleware('auth');
+Route::delete('/admin/contacts/{id}', [AdminController::class, 'destroy'])
+    ->middleware('auth');    
 Route::post('/admin/tags', [TagController::class, 'store'])
     ->middleware('auth');
 Route::get('/admin/tags/{id}/edit', [TagController::class, 'edit'])
