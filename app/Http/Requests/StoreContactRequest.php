@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreContactRequest extends FormRequest
@@ -17,31 +18,31 @@ class StoreContactRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-          'first_name' => ['required', 'string', 'max:255'],
-          'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
 
-          'gender' => ['required', 'integer'],
+            'gender' => ['required', 'integer'],
 
-          'email' => ['required', 'email', 'max:255'],
- 
-          'tel' => ['required', 'digits_between:10,11',],
+            'email' => ['required', 'email', 'max:255'],
 
-          'address' => ['required', 'string', 'max:255'],
+            'tel' => ['required', 'digits_between:10,11'],
 
-          'building' => ['nullable', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
 
-          'category_id' => ['required', 'exists:categories,id'],
+            'building' => ['nullable', 'string', 'max:255'],
 
-          'tag_ids' => [ 'nullable', 'array'],
+            'category_id' => ['required', 'exists:categories,id'],
 
-          'tag_ids.*' => [ 'exists:tags,id',],
+            'tag_ids' => ['nullable', 'array'],
 
-          'detail' => ['required', 'string'],
+            'tag_ids.*' => ['exists:tags,id'],
+
+            'detail' => ['required', 'string'],
         ];
     }
 }

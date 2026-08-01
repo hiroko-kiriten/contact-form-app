@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactRequest;
 use App\Models\Category;
-use App\Models\Tag;
 use App\Models\Contact;
+use App\Models\Tag;
 
 class ContactController extends Controller
 {
@@ -16,7 +16,6 @@ class ContactController extends Controller
 
         return view('contact.index', compact('categories', 'tags'));
     }
-
 
     public function confirm(StoreContactRequest $request)
     {
@@ -36,24 +35,23 @@ class ContactController extends Controller
         ));
     }
 
-public function store(StoreContactRequest $request)
-{
-    $validated = $request->validated();
+    public function store(StoreContactRequest $request)
+    {
+        $validated = $request->validated();
 
-    $tagIds = $validated['tag_ids'] ?? [];
+        $tagIds = $validated['tag_ids'] ?? [];
 
-    unset($validated['tag_ids']);
+        unset($validated['tag_ids']);
 
-    $contact = Contact::create($validated);
+        $contact = Contact::create($validated);
 
-    $contact->tags()->attach($tagIds);
+        $contact->tags()->attach($tagIds);
 
-    return redirect('/thanks');
-}
+        return redirect('/thanks');
+    }
 
-
-public function thanks()
-{
-    return view('contact.thanks');
-}    
+    public function thanks()
+    {
+        return view('contact.thanks');
+    }
 }
