@@ -95,20 +95,21 @@ cd contact-form-app
 
 2. **.envファイルの準備**
 
+　　DB設定の確認
 
-3. **Composer依存パッケージのインストール**
+4. **Composer依存パッケージのインストール**
 
    ./vendor/bin/sail composer install
 
-4. **Laravel Sailの起動**
+5. **Laravel Sailの起動**
 
     ./vendor/bin/sail up -d
 
-5. **アプリケーションキーの生成**
+6. **アプリケーションキーの生成**
 
    ./vendor/bin/sail artisan key:generate
 
-6. **データベースのマイグレーションと初期データ投入**
+7. **データベースのマイグレーションと初期データ投入**
 
  ./vendor/bin/sail artisan migrate --seed
 
