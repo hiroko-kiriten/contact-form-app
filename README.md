@@ -88,7 +88,7 @@ MySQL
 1. **リポジトリをクローン**
 
     ```bash
-    git clone https://○○○○○○
+    git clone https://github.com/hiroko-kiriten/contact-form-app.git
     ```
 プロジェクトディレクトリに移動
 cd contact-form-app
