@@ -13,11 +13,11 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::insert([
-        ['content' => '商品のお届けについて'],
-        ['content' => '商品の交換について'],
-        ['content' => '商品トラブル'],
-        ['content' => 'ショップへのお問合せ'],
-        ['content' => 'その他'],
-    ]);
+            ['content' => '商品のお届けについて'],
+            ['content' => '商品の交換について'],
+            ['content' => '商品トラブル'],
+            ['content' => 'ショップへのお問合せ'],
+            ['content' => 'その他'],
+        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Tag;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ContactSeeder extends Seeder
@@ -14,7 +15,7 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create('ja_JP');
+        $faker = Factory::create('ja_JP');
 
         for ($i = 0; $i < 20; $i++) {
 
@@ -34,7 +35,7 @@ class ContactSeeder extends Seeder
                 Tag::inRandomOrder()
                     ->limit(rand(1, 3))
                     ->pluck('id')
-); 
+            );
 
         }
     }

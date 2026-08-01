@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('contact_id')
-              ->constrained()
-              ->cascadeOnDelete();
+                ->constrained()
+                ->cascadeOnDelete();
 
             $table->foreignId('tag_id')
-              ->constrained()
-              ->cascadeOnDelete();
+                ->constrained()
+                ->cascadeOnDelete();
 
             $table->unique(['contact_id', 'tag_id']);
 
