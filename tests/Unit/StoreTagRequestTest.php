@@ -6,12 +6,12 @@ use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Tests\TestCase;
 
 class StoreTagRequestTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function test_tag_store_validation_passes(): void
     {
@@ -19,12 +19,11 @@ class StoreTagRequestTest extends TestCase
             [
                 'name' => 'お問い合わせ',
             ],
-            (new StoreTagRequest())->rules()
+            (new StoreTagRequest)->rules()
         );
 
         $this->assertFalse($validator->fails());
     }
-
 
     public function test_tag_store_validation_fails_when_name_is_duplicate(): void
     {
@@ -36,12 +35,11 @@ class StoreTagRequestTest extends TestCase
             [
                 'name' => 'お問い合わせ',
             ],
-            (new StoreTagRequest())->rules()
+            (new StoreTagRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
     }
-
 
     public function test_tag_update_allows_same_name(): void
     {
@@ -58,7 +56,7 @@ class StoreTagRequestTest extends TestCase
                     'required',
                     'string',
                     'max:255',
-                    \Illuminate\Validation\Rule::unique('tags', 'name')
+                    Rule::unique('tags', 'name')
                         ->ignore($tag->id),
                 ],
             ]
@@ -68,31 +66,30 @@ class StoreTagRequestTest extends TestCase
     }
 
     public function test_tag_update_fails_when_using_other_tag_name(): void
-{
-    $tag1 = Tag::factory()->create([
-        'name' => 'お問い合わせ',
-    ]);
+    {
+        $tag1 = Tag::factory()->create([
+            'name' => 'お問い合わせ',
+        ]);
 
-    Tag::factory()->create([
-        'name' => '製品',
-    ]);
-
-    $validator = Validator::make(
-        [
+        Tag::factory()->create([
             'name' => '製品',
-        ],
-        [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                \Illuminate\Validation\Rule::unique('tags', 'name')
-                    ->ignore($tag1->id),
+        ]);
+
+        $validator = Validator::make(
+            [
+                'name' => '製品',
             ],
-        ]
-    );
+            [
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('tags', 'name')
+                        ->ignore($tag1->id),
+                ],
+            ]
+        );
 
-    $this->assertTrue($validator->fails());
-}
-
+        $this->assertTrue($validator->fails());
+    }
 }

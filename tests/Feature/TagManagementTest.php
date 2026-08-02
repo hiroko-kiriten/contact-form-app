@@ -28,23 +28,23 @@ class TagManagementTest extends TestCase
     }
 
     public function test_tag_can_be_updated(): void
-{
-    $user = User::factory()->create();
+    {
+        $user = User::factory()->create();
 
-    $tag = Tag::factory()->create([
-        'name' => '更新前タグ',
-    ]);
-
-    $response = $this->actingAs($user)
-        ->put("/admin/tags/{$tag->id}", [
-            'name' => '更新後タグ',
+        $tag = Tag::factory()->create([
+            'name' => '更新前タグ',
         ]);
 
-    $response->assertRedirect();
+        $response = $this->actingAs($user)
+            ->put("/admin/tags/{$tag->id}", [
+                'name' => '更新後タグ',
+            ]);
 
-    $this->assertDatabaseHas('tags', [
-        'id' => $tag->id,
-        'name' => '更新後タグ',
-    ]);
-}
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('tags', [
+            'id' => $tag->id,
+            'name' => '更新後タグ',
+        ]);
+    }
 }

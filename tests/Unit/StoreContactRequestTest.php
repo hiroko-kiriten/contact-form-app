@@ -30,12 +30,11 @@ class StoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertFalse($validator->fails());
     }
-
 
     public function test_contact_store_validation_fails_without_required_fields(): void
     {
@@ -43,7 +42,7 @@ class StoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());

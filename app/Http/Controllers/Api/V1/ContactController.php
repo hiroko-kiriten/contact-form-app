@@ -26,8 +26,8 @@ class ContactController extends Controller
 
             $query->where(function ($q) use ($keyword) {
                 $q->where('first_name', 'like', "%{$keyword}%")
-                  ->orWhere('last_name', 'like', "%{$keyword}%")
-                  ->orWhere('email', 'like', "%{$keyword}%");
+                    ->orWhere('last_name', 'like', "%{$keyword}%")
+                    ->orWhere('email', 'like', "%{$keyword}%");
             });
         }
 
@@ -46,8 +46,8 @@ class ContactController extends Controller
         ]);
 
         return new ContactResource($contact);
-    }  
-    
+    }
+
     public function store(StoreContactRequest $request)
     {
         $validated = $request->validated();
@@ -65,9 +65,9 @@ class ContactController extends Controller
             'tags',
         ]);
 
-    return (new ContactResource($contact))
-        ->response()
-        ->setStatusCode(201);
+        return (new ContactResource($contact))
+            ->response()
+            ->setStatusCode(201);
     }
 
     public function update(UpdateContactRequest $request, Contact $contact)

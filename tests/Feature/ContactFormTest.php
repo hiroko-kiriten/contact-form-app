@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ContactFormTest extends TestCase
 {
-     use RefreshDatabase;
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -39,40 +40,40 @@ class ContactFormTest extends TestCase
             'building' => 'テストビル',
             'detail' => 'テスト内容',
             'tag_ids' => [$tag->id],
-    ]);
+        ]);
 
-    $response->assertStatus(200);
-}
+        $response->assertStatus(200);
+    }
 
-public function test_contact_can_be_stored(): void
-{
-    $category = Category::factory()->create();
+    public function test_contact_can_be_stored(): void
+    {
+        $category = Category::factory()->create();
 
-    $tag = Tag::factory()->create();
+        $tag = Tag::factory()->create();
 
-    $response = $this->post('/contacts', [
-        'category_id' => $category->id,
-        'first_name' => '山田',
-        'last_name' => '太郎',
-        'gender' => 1,
-        'email' => 'test@example.com',
-        'tel' => '08012345678',
-        'address' => '東京都渋谷区',
-        'building' => 'テストビル',
-        'detail' => 'お問い合わせ内容',
-        'tag_ids' => [$tag->id],
-    ]);
+        $response = $this->post('/contacts', [
+            'category_id' => $category->id,
+            'first_name' => '山田',
+            'last_name' => '太郎',
+            'gender' => 1,
+            'email' => 'test@example.com',
+            'tel' => '08012345678',
+            'address' => '東京都渋谷区',
+            'building' => 'テストビル',
+            'detail' => 'お問い合わせ内容',
+            'tag_ids' => [$tag->id],
+        ]);
 
-    $response->assertRedirect('/thanks');
+        $response->assertRedirect('/thanks');
 
-    $this->assertDatabaseHas('contacts', [
-        'first_name' => '山田',
-        'last_name' => '太郎',
-        'email' => 'test@example.com',
-    ]);
+        $this->assertDatabaseHas('contacts', [
+            'first_name' => '山田',
+            'last_name' => '太郎',
+            'email' => 'test@example.com',
+        ]);
 
-    $this->assertDatabaseHas('contact_tag', [
-        'tag_id' => $tag->id,
-    ]);
-}
+        $this->assertDatabaseHas('contact_tag', [
+            'tag_id' => $tag->id,
+        ]);
+    }
 }

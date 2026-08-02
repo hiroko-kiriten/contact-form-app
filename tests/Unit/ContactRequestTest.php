@@ -19,12 +19,11 @@ class ContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new ContactRequest())->rules()
+            (new ContactRequest)->rules()
         );
 
         $this->assertFalse($validator->fails());
     }
-
 
     public function test_contact_search_validation_fails_with_invalid_date(): void
     {
@@ -34,7 +33,7 @@ class ContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new ContactRequest())->rules()
+            (new ContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
