@@ -96,4 +96,22 @@ class AdminContactTest extends TestCase
         'id' => $contact->id,
     ]);
 }
+
+    public function test_guest_cannot_access_admin_dashboard(): void
+{
+    $response = $this->get('/admin');
+
+    $response->assertRedirect('/login');
+}
+
+    public function test_authenticated_user_can_access_admin_dashboard(): void
+{
+    $user = User::factory()->create();
+
+    $response = $this
+        ->actingAs($user)
+        ->get('/admin');
+
+    $response->assertStatus(200);
+}
 }
