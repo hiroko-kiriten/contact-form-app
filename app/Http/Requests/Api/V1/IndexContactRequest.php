@@ -25,7 +25,13 @@ class IndexContactRequest extends FormRequest
         return [
             'keyword' => ['nullable', 'string'],
 
-            'per_page' => ['nullable', 'integer', 'min:1'],
+            'gender' => ['nullable', 'in:1,2,3'],
+
+            'category_id' => ['nullable', 'exists:categories,id'],
+
+            'date' => ['nullable', 'date'],
+
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ];
     }
 }

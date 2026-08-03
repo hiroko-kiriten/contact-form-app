@@ -30,6 +30,17 @@ class ContactController extends Controller
                     ->orWhere('email', 'like', "%{$keyword}%");
             });
         }
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
+        }
+
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
 
         $contacts = $query
             ->latest()
